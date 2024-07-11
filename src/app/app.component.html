@@ -1,0 +1,43 @@
+<div class="container">
+  <!-- Modal de edição -->
+  <p-dialog [(visible)]="showModal" [style]="{ width: '50vw', height: '400px' }">
+    <div class="modal">
+      <div class="modal-content">
+        <h2>Editar Tabela</h2>
+
+        <!-- p-dropdown -->
+          <p-dropdown
+          [options]="opcoes "
+          (onChange)="onChange($event)"
+          optionLabel="label"
+          [showClear]="true"
+          placeholder="Select an item"
+          ></p-dropdown>
+
+          <input [disabled]="true" type="text" [(ngModel)]="produtoAgropecuarioVO.deUnidadeMedida" #deUnidadeMedida="ngModel">
+      </div>
+      <div class="container-close--modal">
+        <p-button (click)="fecharModal()" label="Fechar"></p-button>
+      </div>
+    </div>
+  </p-dialog>
+
+
+  <!-- Tabela -->
+  <p-table [value]="tabelaItens" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+      <tr>
+          <th>Nome</th>
+          <th>Valor</th>
+          <th>Ação</th>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-product>
+    <tr>
+        <td>{{ product.nome }}</td>
+        <td>{{ product.valor }}</td>
+        <td><p-button (click)="abrirModal(product)" label="Editar"></p-button></td>
+    </tr>
+</ng-template>
+  </p-table>
+</div>
